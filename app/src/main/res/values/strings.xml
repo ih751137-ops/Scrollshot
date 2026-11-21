@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">ScrollShot</string>
+    <string name="app_tagline">Long Screenshot &amp; Studio</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_gallery">Gallery</string>
+    <string name="nav_editor">Editor</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Home Screen -->
+    <string name="home_hero_title">Capture Entire Screens Seamlessly</string>
+    <string name="home_hero_subtitle">Works across chats, browsers, and feeds with pixel-accurate local stitching.</string>
+    <string name="action_start_long_screenshot">Start Long Screenshot</string>
+    <string name="action_quick_screenshot">Quick Screenshot</string>
+    <string name="action_screenshot_gallery">Screenshot Gallery</string>
+    <string name="action_image_editor">Image Editor</string>
+    <string name="action_convert_pdf">Convert to PDF</string>
+    <string name="action_text_extractor">Text Extractor</string>
+    <string name="home_capture_mode_label">Capture Mode</string>
+    <string name="home_direction_label">Stitch Direction</string>
+    <string name="mode_auto_detect">Auto Detect</string>
+    <string name="mode_manual">Manual</string>
+    <string name="mode_auto_scroll">Auto-Scroll</string>
+    <string name="direction_vertical">Vertical</string>
+    <string name="direction_horizontal">Horizontal</string>
+    <string name="home_recent_captures">Recent Screenshots</string>
+    <string name="home_last_capture">Last Capture</string>
+    <string name="home_storage_available">Available Storage</string>
+    <string name="home_low_storage_warning">Low storage space. Free up space for long captures.</string>
+    <string name="home_recover_title">Incomplete Capture Found</string>
+    <string name="home_recover_subtitle">%1$d frames saved from an interrupted session.</string>
+    <string name="action_recover_stitch">Recover &amp; Stitch</string>
+    <string name="action_discard">Discard</string>
+
+    <!-- Capture Session & Notification -->
+    <string name="capture_notification_channel_name">Screen Capture Session</string>
+    <string name="capture_notification_channel_desc">Controls and status for active ScrollShot screen capture sessions.</string>
+    <string name="capture_status_title">ScrollShot Capture Active</string>
+    <string name="capture_status_countdown">Starting in %1$ds… Switch to target app</string>
+    <string name="capture_status_active">%1$s • %2$d frames • %3$s</string>
+    <string name="capture_status_paused">Paused • %1$d frames • %2$s</string>
+    <string name="capture_action_frame">Capture Frame</string>
+    <string name="capture_action_pause">Pause</string>
+    <string name="capture_action_resume">Resume</string>
+    <string name="capture_action_finish">Finish &amp; Stitch</string>
+    <string name="capture_action_cancel">Cancel</string>
+    <string name="capture_action_undo">Undo Frame</string>
+
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_label">ScrollShot Auto-Scroll</string>
+    <string name="accessibility_service_description">Used exclusively during an active user-started Auto-Scroll screenshot session to perform scroll gestures. ScrollShot never collects screen text or monitors unrelated app activity.</string>
+
+    <!-- Gallery -->
+    <string name="gallery_title">Screenshot Gallery</string>
+    <string name="gallery_search_hint">Search filename or extracted text…</string>
+    <string name="gallery_empty_title">No Screenshots Yet</string>
+    <string name="gallery_empty_subtitle">Start a Long Screenshot, Quick Screenshot, or import an image from your device.</string>
+    <string name="gallery_import_photo">Import Photo</string>
+    <string name="gallery_new_album">New Album</string>
+    <string name="gallery_all_album">All</string>
+    <string name="gallery_long_album">Long</string>
+    <string name="gallery_favorites_album">Favorites</string>
+    <string name="sort_newest">Newest First</string>
+    <string name="sort_oldest">Oldest First</string>
+    <string name="sort_largest">File Size</string>
+    <string name="sort_dimensions">Image Dimensions</string>
+    <string name="gallery_manage_albums">Manage Albums</string>
+    <string name="gallery_clear_filters">Clear Filters</string>
+    <string name="gallery_loading">Loading screenshots…</string>
+
+    <!-- Editor -->
+    <string name="editor_title">Screenshot Editor</string>
+    <string name="editor_empty_title">Open an Image to Edit</string>
+    <string name="editor_empty_subtitle">Pick a screenshot from Gallery or import a photo to crop, annotate, blur, or pixelate.</string>
+    <string name="editor_save_copy">Save Copy</string>
+    <string name="editor_overwrite">Overwrite Original</string>
+    <string name="editor_undo">Undo</string>
+    <string name="editor_redo">Redo</string>
+    <string name="editor_reset">Reset</string>
+
+    <!-- PDF & OCR -->
+    <string name="pdf_title">Convert to PDF</string>
+    <string name="ocr_title">On-Device Text Extractor</string>
+    <string name="ocr_privacy_note">100% on-device recognition. Your screenshots never leave your phone.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_capture">Capture &amp; Stitching</string>
+    <string name="settings_section_storage">Output &amp; Storage</string>
+    <string name="settings_section_appearance">Appearance &amp; Language</string>
+    <string name="settings_section_privacy">Privacy, Help &amp; About</string>
+    <string name="language_english">English</string>
+    <string name="language_hindi">हिन्दी (Hindi)</string>
+
+    <!-- Errors -->
+    <string name="error_permission_denied">Screen capture permission was denied. Grant permission to capture screenshots.</string>
+    <string name="error_permission_revoked">Screen capture session stopped by system or lock screen.</string>
+    <string name="error_secure_content">Protected content detected (FLAG_SECURE or DRM). Android blocks capturing secure screens.</string>
+    <string name="error_insufficient_storage">Insufficient device storage to save capture. Free up space and try again.</string>
+    <string name="error_low_memory">Memory limit reached. Finishing capture safely with collected frames.</string>
+    <string name="error_stitch_failed">Automatic overlap detection had low confidence. Use the Manual Alignment Editor to align seams.</string>
+    <string name="error_autoscroll_unsupported">This app does not support automatic scrolling. Switch to Manual Capture Mode to scroll yourself.</string>
+    <string name="error_save_failed">Could not save the screenshot image. Check available storage space and try again.</string>
+    <string name="storage_legacy_permission_denied_notice">Storage permission denied — screenshots are still saved inside ScrollShot and can be shared or exported.</string>
+    <string name="storage_enable_gallery_sync">Allow Gallery Save</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "name": "ScrollShot",
+  "description": "Advanced native Android long scrolling screenshot capture, image stitching, annotation editor, PDF exporter, and on-device OCR manager.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

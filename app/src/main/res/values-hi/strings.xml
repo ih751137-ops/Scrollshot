@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">ScrollShot</string>
+    <string name="app_tagline">लॉन्ग स्क्रीनशॉट और स्टूडियो</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">होम</string>
+    <string name="nav_gallery">गैलरी</string>
+    <string name="nav_editor">एडिटर</string>
+    <string name="nav_settings">सेटिंग्स</string>
+
+    <!-- Home Screen -->
+    <string name="home_hero_title">पूरी स्क्रीन आसानी से कैप्चर करें</string>
+    <string name="home_hero_subtitle">चैट, ब्राउज़र और फ़ीड पर सटीक ऑन-डिवाइस स्टिचिंग के साथ काम करता है।</string>
+    <string name="action_start_long_screenshot">लॉन्ग स्क्रीनशॉट शुरू करें</string>
+    <string name="action_quick_screenshot">क्विक स्क्रीनशॉट</string>
+    <string name="action_screenshot_gallery">स्क्रीनशॉट गैलरी</string>
+    <string name="action_image_editor">इमेज एडिटर</string>
+    <string name="action_convert_pdf">PDF में बदलें</string>
+    <string name="action_text_extractor">टेक्स्ट एक्सट्रैक्टर</string>
+    <string name="home_capture_mode_label">कैप्चर मोड</string>
+    <string name="home_direction_label">स्टिच दिशा</string>
+    <string name="mode_auto_detect">ऑटो डिटेक्ट</string>
+    <string name="mode_manual">मैनुअल</string>
+    <string name="mode_auto_scroll">ऑटो-स्क्रॉल</string>
+    <string name="direction_vertical">वर्टिकल</string>
+    <string name="direction_horizontal">हॉरिजॉन्टल</string>
+    <string name="home_recent_captures">हाल के स्क्रीनशॉट</string>
+    <string name="home_last_capture">पिछला कैप्चर</string>
+    <string name="home_storage_available">उपलब्ध स्टोरेज</string>
+    <string name="home_low_storage_warning">स्टोरेज कम है। लंबे कैप्चर के लिए जगह खाली करें।</string>
+    <string name="home_recover_title">अधूरा कैप्चर मिला</string>
+    <string name="home_recover_subtitle">बाधित सत्र से %1$d फ़्रेम सहेजे गए हैं।</string>
+    <string name="action_recover_stitch">रिकवर और स्टिच करें</string>
+    <string name="action_discard">हटाएँ</string>
+
+    <!-- Capture Session & Notification -->
+    <string name="capture_notification_channel_name">स्क्रीन कैप्चर सत्र</string>
+    <string name="capture_notification_channel_desc">सक्रिय ScrollShot स्क्रीन कैप्चर सत्र के नियंत्रण और स्थिति।</string>
+    <string name="capture_status_title">ScrollShot कैप्चर सक्रिय है</string>
+    <string name="capture_status_countdown">%1$d सेकंड में शुरू… लक्ष्य ऐप खोलें</string>
+    <string name="capture_status_active">%1$s • %2$d फ़्रेम • %3$s</string>
+    <string name="capture_status_paused">रोका गया • %1$d फ़्रेम • %2$s</string>
+    <string name="capture_action_frame">फ़्रेम कैप्चर करें</string>
+    <string name="capture_action_pause">रोकें</string>
+    <string name="capture_action_resume">जारी रखें</string>
+    <string name="capture_action_finish">समाप्त और स्टिच</string>
+    <string name="capture_action_cancel">रद्द करें</string>
+    <string name="capture_action_undo">पिछला फ़्रेम हटाएँ</string>
+
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_label">ScrollShot ऑटो-स्क्रॉल</string>
+    <string name="accessibility_service_description">केवल उपयोगकर्ता द्वारा शुरू किए गए सक्रिय ऑटो-स्क्रॉल स्क्रीनशॉट सत्र के दौरान स्क्रॉल जेस्चर करने के लिए उपयोग किया जाता है। ScrollShot कभी भी स्क्रीन टेक्स्ट एकत्र नहीं करता।</string>
+
+    <!-- Gallery -->
+    <string name="gallery_title">स्क्रीनशॉट गैलरी</string>
+    <string name="gallery_search_hint">फ़ाइल नाम या निकाला गया टेक्स्ट खोजें…</string>
+    <string name="gallery_empty_title">अभी तक कोई स्क्रीनशॉट नहीं</string>
+    <string name="gallery_empty_subtitle">लॉन्ग स्क्रीनशॉट, क्विक स्क्रीनशॉट शुरू करें या डिवाइस से फ़ोटो आयात करें।</string>
+    <string name="gallery_import_photo">फ़ोटो आयात करें</string>
+    <string name="gallery_new_album">नया एल्बम</string>
+    <string name="gallery_all_album">सभी</string>
+    <string name="gallery_long_album">लॉन्ग</string>
+    <string name="gallery_favorites_album">पसंदीदा</string>
+    <string name="sort_newest">नवीनतम पहले</string>
+    <string name="sort_oldest">सबसे पुराना पहले</string>
+    <string name="sort_largest">फ़ाइल आकार</string>
+    <string name="sort_dimensions">छवि आयाम</string>
+    <string name="gallery_manage_albums">एल्बम प्रबंधित करें</string>
+    <string name="gallery_clear_filters">फ़िल्टर साफ़ करें</string>
+    <string name="gallery_loading">स्क्रीनशॉट लोड हो रहे हैं…</string>
+
+    <!-- Editor -->
+    <string name="editor_title">स्क्रीनशॉट एडिटर</string>
+    <string name="editor_empty_title">संपादन के लिए छवि खोलें</string>
+    <string name="editor_empty_subtitle">क्रॉप, एनोटेट, ब्लर या पिक्सलेट करने के लिए गैलरी से स्क्रीनशॉट चुनें।</string>
+    <string name="editor_save_copy">कॉपी सहेजें</string>
+    <string name="editor_overwrite">मूल बदलें</string>
+    <string name="editor_undo">पूर्ववत करें</string>
+    <string name="editor_redo">फिर से करें</string>
+    <string name="editor_reset">रीसेट करें</string>
+
+    <!-- PDF & OCR -->
+    <string name="pdf_title">PDF में बदलें</string>
+    <string name="ocr_title">ऑन-डिवाइस टेक्स्ट एक्सट्रैक्टर</string>
+    <string name="ocr_privacy_note">100% ऑन-डिवाइस पहचान। आपके स्क्रीनशॉट कभी सर्वर पर नहीं भेजे जाते।</string>
+
+    <!-- Settings -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_section_capture">कैप्चर और स्टिचिंग</string>
+    <string name="settings_section_storage">आउटपुट और स्टोरेज</string>
+    <string name="settings_section_appearance">दिखावट और भाषा</string>
+    <string name="settings_section_privacy">गोपनीयता, सहायता और परिचय</string>
+    <string name="language_english">English</string>
+    <string name="language_hindi">हिन्दी (Hindi)</string>
+
+    <!-- Errors -->
+    <string name="error_permission_denied">स्क्रीन कैप्चर अनुमति अस्वीकार कर दी गई। स्क्रीनशॉट लेने के लिए अनुमति दें।</string>
+    <string name="error_permission_revoked">सिस्टम या लॉक स्क्रीन द्वारा कैप्चर सत्र रोक दिया गया।</string>
+    <string name="error_secure_content">सुरक्षित सामग्री (FLAG_SECURE या DRM) मिली। Android सुरक्षित स्क्रीन कैप्चर करने से रोकता है।</string>
+    <string name="error_insufficient_storage">कैप्चर सहेजने के लिए पर्याप्त स्टोरेज नहीं है। जगह खाली करें और पुनः प्रयास करें।</string>
+    <string name="error_low_memory">मेमोरी सीमा पूरी हुई। एकत्रित फ़्रेमों के साथ कैप्चर समाप्त किया जा रहा है।</string>
+    <string name="error_stitch_failed">स्वचालित ओवरलैप मिलान कम सटीक था। सीम मिलाने के लिए मैनुअल अलाइनमेंट एडिटर का उपयोग करें।</string>
+    <string name="error_autoscroll_unsupported">यह ऐप स्वचालित स्क्रॉलिंग का समर्थन नहीं करता है। कृपया मैनुअल कैप्चर मोड का उपयोग करें।</string>
+</resources>
