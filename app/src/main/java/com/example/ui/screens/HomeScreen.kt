@@ -87,7 +87,6 @@ fun HomeScreen(
     recoverableSession: CaptureSessionEntity?,
     captureState: CaptureSessionUiState,
     availableStorageBytes: Long,
-    isAutoScrollServiceEnabled: Boolean,
     onStartLongScreenshot: (CaptureMode, StitchDirection) -> Unit,
     onStartQuickScreenshot: () -> Unit,
     onNavigateGallery: () -> Unit,
@@ -104,8 +103,6 @@ fun HomeScreen(
     onFinishCapture: () -> Unit,
     onCancelCapture: () -> Unit,
     onOpenSeamEditor: () -> Unit,
-    onOpenAccessibilitySettings: () -> Unit,
-    onSwitchToManualMode: () -> Unit,
     onDismissCaptureStatus: () -> Unit,
     onUpdateMode: (CaptureMode) -> Unit,
     onUpdateDirection: (StitchDirection) -> Unit,
@@ -192,8 +189,6 @@ fun HomeScreen(
                 onCancel = onCancelCapture,
                 onOpenDetail = onOpenScreenshotDetail,
                 onOpenSeamEditor = onOpenSeamEditor,
-                onOpenAccessibilitySettings = onOpenAccessibilitySettings,
-                onSwitchToManualMode = onSwitchToManualMode,
                 onDismiss = onDismissCaptureStatus
             )
         }
@@ -291,30 +286,11 @@ fun HomeScreen(
                                 val label = when (mode) {
                                     CaptureMode.AUTO_DETECT -> stringResource(R.string.mode_auto_detect)
                                     CaptureMode.MANUAL -> stringResource(R.string.mode_manual)
-                                    CaptureMode.AUTO_SCROLL -> stringResource(R.string.mode_auto_scroll)
                                 }
                                 FilterChip(
                                     selected = selected,
                                     onClick = { onUpdateMode(mode) },
                                     label = { Text(label, style = MaterialTheme.typography.labelLarge) }
-                                )
-                            }
-                        }
-
-                        if (preferences.defaultCaptureMode == CaptureMode.AUTO_SCROLL && !isAutoScrollServiceEnabled) {
-                            Spacer(Modifier.height(6.dp))
-                            Surface(
-                                color = Color(0x33F59E0B),
-                                shape = MaterialTheme.shapes.small,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable { onOpenAccessibilitySettings() }
-                            ) {
-                                Text(
-                                    text = "Enable ScrollShot Auto-Scroll in Android Accessibility Settings (or switch to Manual).",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = Color(0xFFFDE68A),
-                                    modifier = Modifier.padding(10.dp)
                                 )
                             }
                         }
@@ -416,7 +392,7 @@ fun HomeScreen(
                 val cards = listOf(
                     ActionCardSpec(
                         title = stringResource(R.string.action_start_long_screenshot),
-                        subtitle = "Auto, Manual, Scroll",
+                        subtitle = "Auto Detect & Manual",
                         icon = Icons.Rounded.AutoAwesomeMotion,
                         accent = MaterialTheme.colorScheme.primary,
                         tag = "card_long_screenshot",

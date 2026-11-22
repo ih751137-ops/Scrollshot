@@ -21,7 +21,6 @@
     <string name="home_direction_label">स्टिच दिशा</string>
     <string name="mode_auto_detect">ऑटो डिटेक्ट</string>
     <string name="mode_manual">मैनुअल</string>
-    <string name="mode_auto_scroll">ऑटो-स्क्रॉल</string>
     <string name="direction_vertical">वर्टिकल</string>
     <string name="direction_horizontal">हॉरिजॉन्टल</string>
     <string name="home_recent_captures">हाल के स्क्रीनशॉट</string>
@@ -46,10 +45,6 @@
     <string name="capture_action_finish">समाप्त और स्टिच</string>
     <string name="capture_action_cancel">रद्द करें</string>
     <string name="capture_action_undo">पिछला फ़्रेम हटाएँ</string>
-
-    <!-- Accessibility Service -->
-    <string name="accessibility_service_label">ScrollShot ऑटो-स्क्रॉल</string>
-    <string name="accessibility_service_description">केवल उपयोगकर्ता द्वारा शुरू किए गए सक्रिय ऑटो-स्क्रॉल स्क्रीनशॉट सत्र के दौरान स्क्रॉल जेस्चर करने के लिए उपयोग किया जाता है। ScrollShot कभी भी स्क्रीन टेक्स्ट एकत्र नहीं करता।</string>
 
     <!-- Gallery -->
     <string name="gallery_title">स्क्रीनशॉट गैलरी</string>
@@ -100,5 +95,4 @@
     <string name="error_insufficient_storage">कैप्चर सहेजने के लिए पर्याप्त स्टोरेज नहीं है। जगह खाली करें और पुनः प्रयास करें।</string>
     <string name="error_low_memory">मेमोरी सीमा पूरी हुई। एकत्रित फ़्रेमों के साथ कैप्चर समाप्त किया जा रहा है।</string>
     <string name="error_stitch_failed">स्वचालित ओवरलैप मिलान कम सटीक था। सीम मिलाने के लिए मैनुअल अलाइनमेंट एडिटर का उपयोग करें।</string>
-    <string name="error_autoscroll_unsupported">यह ऐप स्वचालित स्क्रॉलिंग का समर्थन नहीं करता है। कृपया मैनुअल कैप्चर मोड का उपयोग करें।</string>
 </resources>

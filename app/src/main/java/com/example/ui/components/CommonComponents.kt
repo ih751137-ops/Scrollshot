@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Undo
-import androidx.compose.material.icons.rounded.AccessibilityNew
 import androidx.compose.material.icons.rounded.CameraAlt
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Close
@@ -127,8 +126,6 @@ fun CaptureStatusBanner(
     onCancel: () -> Unit,
     onOpenDetail: (Long) -> Unit,
     onOpenSeamEditor: () -> Unit,
-    onOpenAccessibilitySettings: () -> Unit,
-    onSwitchToManualMode: () -> Unit,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -316,19 +313,6 @@ fun CaptureStatusBanner(
                         }
                         Spacer(modifier = Modifier.height(10.dp))
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            if (state.errorType == CaptureErrorType.AUTOSCROLL_UNSUPPORTED) {
-                                Button(
-                                    onClick = onOpenAccessibilitySettings,
-                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-                                ) {
-                                    Icon(Icons.Rounded.AccessibilityNew, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(Modifier.width(4.dp))
-                                    Text("Accessibility Settings")
-                                }
-                                OutlinedButton(onClick = onSwitchToManualMode) {
-                                    Text("Use Manual Mode")
-                                }
-                            }
                             if (state.lastStitchPlan != null && state.framePaths.size > 1) {
                                 Button(onClick = onOpenSeamEditor) {
                                     Text("Manual Align")
@@ -358,7 +342,7 @@ fun CaptureInstructionsDialog(
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 InstructionStep(
                     "1. Choose Mode & Start",
-                    "Select Auto Detect, Manual, or Auto-Scroll, then tap Start Long Screenshot and grant Android screen capture consent."
+                    "Select Auto Detect or Manual, then tap Start Long Screenshot and grant Android screen capture consent."
                 )
                 InstructionStep(
                     "2. Scroll Your Target App",

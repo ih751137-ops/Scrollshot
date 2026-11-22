@@ -29,6 +29,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import org.robolectric.util.ReflectionHelpers
 import java.io.File
 
 @RunWith(RobolectricTestRunner::class)
@@ -79,57 +80,62 @@ class MediaStorageManagerTest {
     }
 
     @Test
-    @Config(sdk = [28])
+    @Config(sdk = [36])
     fun `android 8 and 9 falls back gracefully to app storage when write permission denied and publishes when granted`() {
         val bmp = warmUpGraphicsAndCreateBitmap(200, 400, Color.GREEN)
         val app = ApplicationProvider.getApplicationContext<ScrollShotApp>()
         val shadowApp = shadowOf(app)
 
-        // 1. Permission denied on API 28
-        shadowApp.denyPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        assertTrue(StoragePermissionHelper.requiresLegacyGalleryWritePermission(Build.VERSION_CODES.P))
-        assertFalse(StoragePermissionHelper.hasLegacyGalleryWritePermission(app, Build.VERSION_CODES.P))
-        assertEquals(
-            GalleryStorageAccessMode.APP_STORAGE_ONLY_PERMISSION_DENIED,
-            StoragePermissionHelper.getAccessMode(app, Build.VERSION_CODES.P)
-        )
-
-        runBlocking {
-            val deniedSave = app.repository.saveNewScreenshotResult(
-                bitmap = bmp,
-                title = "LegacyDeniedShot",
-                format = ImageFormat.PNG,
-                jpegQuality = 92,
-                isLongScreenshot = false,
-                frameCount = 1
-            )
-            assertTrue(deniedSave.isSuccess)
-            val outcome = deniedSave.getOrThrow()
-            assertTrue(File(outcome.entity.filePath).exists())
-            assertFalse(outcome.galleryPublished)
-            assertNotNull(outcome.galleryWarning)
-
-            // 2. Grant permission on API 28 -> publishes to public Pictures/ScrollShot too
-            shadowApp.grantPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        ReflectionHelpers.setStaticField(Build.VERSION::class.java, "SDK_INT", Build.VERSION_CODES.P)
+        try {
+            // 1. Permission denied on API 28
+            shadowApp.denyPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            assertTrue(StoragePermissionHelper.requiresLegacyGalleryWritePermission(Build.VERSION_CODES.P))
+            assertFalse(StoragePermissionHelper.hasLegacyGalleryWritePermission(app, Build.VERSION_CODES.P))
             assertEquals(
-                GalleryStorageAccessMode.LEGACY_PUBLIC_GALLERY_GRANTED,
+                GalleryStorageAccessMode.APP_STORAGE_ONLY_PERMISSION_DENIED,
                 StoragePermissionHelper.getAccessMode(app, Build.VERSION_CODES.P)
             )
-            val grantedSave = app.repository.saveNewScreenshotResult(
-                bitmap = bmp,
-                title = "LegacyGrantedShot",
-                format = ImageFormat.PNG,
-                jpegQuality = 92,
-                isLongScreenshot = false,
-                frameCount = 1
-            )
-            assertTrue(grantedSave.isSuccess)
-            val grantedOutcome = grantedSave.getOrThrow()
-            assertTrue(File(grantedOutcome.entity.filePath).exists())
-            assertTrue(grantedOutcome.galleryPublished)
-            assertNull(grantedOutcome.galleryWarning)
+
+            runBlocking {
+                val deniedSave = app.repository.saveNewScreenshotResult(
+                    bitmap = bmp,
+                    title = "LegacyDeniedShot",
+                    format = ImageFormat.PNG,
+                    jpegQuality = 92,
+                    isLongScreenshot = false,
+                    frameCount = 1
+                )
+                assertTrue(deniedSave.isSuccess)
+                val outcome = deniedSave.getOrThrow()
+                assertTrue(File(outcome.entity.filePath).exists())
+                assertFalse(outcome.galleryPublished)
+                assertNotNull(outcome.galleryWarning)
+
+                // 2. Grant permission on API 28 -> publishes to public Pictures/ScrollShot too
+                shadowApp.grantPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                assertEquals(
+                    GalleryStorageAccessMode.LEGACY_PUBLIC_GALLERY_GRANTED,
+                    StoragePermissionHelper.getAccessMode(app, Build.VERSION_CODES.P)
+                )
+                val grantedSave = app.repository.saveNewScreenshotResult(
+                    bitmap = bmp,
+                    title = "LegacyGrantedShot",
+                    format = ImageFormat.PNG,
+                    jpegQuality = 92,
+                    isLongScreenshot = false,
+                    frameCount = 1
+                )
+                assertTrue(grantedSave.isSuccess)
+                val grantedOutcome = grantedSave.getOrThrow()
+                assertTrue(File(grantedOutcome.entity.filePath).exists())
+                assertTrue(grantedOutcome.galleryPublished)
+                assertNull(grantedOutcome.galleryWarning)
+            }
+        } finally {
+            ReflectionHelpers.setStaticField(Build.VERSION::class.java, "SDK_INT", 36)
+            bmp.recycle()
         }
-        bmp.recycle()
     }
 
     @Test

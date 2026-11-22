@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -152,7 +151,6 @@ private fun ScrollShotScaffold(
     val availableBytes by mainViewModel.availableStorageBytes.collectAsStateWithLifecycle()
     val usedBytes by mainViewModel.usedStorageBytes.collectAsStateWithLifecycle()
     val storageAccessMode by mainViewModel.storageAccessMode.collectAsStateWithLifecycle()
-    val isAutoScrollEnabled by mainViewModel.isAutoScrollEnabled.collectAsStateWithLifecycle()
     val pdfState by mainViewModel.pdfUiState.collectAsStateWithLifecycle()
     val ocrState by mainViewModel.ocrUiState.collectAsStateWithLifecycle()
     val seamState by mainViewModel.seamEditorState.collectAsStateWithLifecycle()
@@ -285,16 +283,6 @@ private fun ScrollShotScaffold(
         }
     }
 
-    fun openAccessibilitySettings() {
-        runCatching {
-            context.startActivity(
-                Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-        }.onFailure {
-            mainViewModel.showToast("Open Android Settings -> Accessibility to enable ScrollShot Auto-Scroll.")
-        }
-    }
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: Routes.HOME
     val showTopLevelNav = currentRoute == Routes.HOME ||
@@ -374,7 +362,6 @@ private fun ScrollShotScaffold(
                             recoverableSession = recoverableSession,
                             captureState = captureState,
                             availableStorageBytes = availableBytes,
-                            isAutoScrollServiceEnabled = isAutoScrollEnabled,
                             onStartLongScreenshot = { mode, dir -> requestCapture(false, mode, dir) },
                             onStartQuickScreenshot = { requestCapture(true, CaptureMode.MANUAL, StitchDirection.VERTICAL) },
                             onNavigateGallery = { navController.navigate(Routes.GALLERY) },
@@ -395,11 +382,6 @@ private fun ScrollShotScaffold(
                                     mainViewModel.loadStitchPlanForAlignment(it)
                                     navController.navigate(Routes.SEAM_ALIGNMENT)
                                 }
-                            },
-                            onOpenAccessibilitySettings = { openAccessibilitySettings() },
-                            onSwitchToManualMode = {
-                                mainViewModel.updatePreferences { it.copy(defaultCaptureMode = CaptureMode.MANUAL) }
-                                ScreenCaptureService.resetSessionState()
                             },
                             onDismissCaptureStatus = { ScreenCaptureService.resetSessionState() },
                             onUpdateMode = { m -> mainViewModel.updatePreferences { it.copy(defaultCaptureMode = m) } },
@@ -510,12 +492,10 @@ private fun ScrollShotScaffold(
                             albums = albums,
                             usedStorageBytes = usedBytes,
                             availableStorageBytes = availableBytes,
-                            isAutoScrollEnabled = isAutoScrollEnabled,
                             storageAccessMode = storageAccessMode,
                             onRequestLegacyGalleryPermission = { requestLegacyGalleryPermission() },
                             onUpdatePreferences = mainViewModel::updatePreferences,
-                            onClearCache = mainViewModel::clearTemporaryCache,
-                            onOpenAccessibilitySettings = { openAccessibilitySettings() }
+                            onClearCache = mainViewModel::clearTemporaryCache
                         )
                     }
 

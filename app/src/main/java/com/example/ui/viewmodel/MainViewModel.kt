@@ -6,7 +6,6 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ScrollShotApp
-import com.example.accessibility.ScrollAccessibilityService
 import com.example.capture.CaptureSessionUiState
 import com.example.capture.ScreenCaptureService
 import com.example.data.local.AlbumEntity
@@ -85,7 +84,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     val captureState: StateFlow<CaptureSessionUiState> = ScreenCaptureService.sessionState
-    val isAutoScrollEnabled: StateFlow<Boolean> = ScrollAccessibilityService.isEnabled
 
     private val _availableStorageBytes = MutableStateFlow(repository.storage.getAvailableStorageBytes())
     val availableStorageBytes: StateFlow<Long> = _availableStorageBytes.asStateFlow()

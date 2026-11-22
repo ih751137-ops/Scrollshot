@@ -2,8 +2,7 @@ package com.example.data.model
 
 enum class CaptureMode {
     AUTO_DETECT,
-    MANUAL,
-    AUTO_SCROLL
+    MANUAL
 }
 
 enum class StitchDirection {
@@ -64,7 +63,6 @@ data class UserPreferences(
     val autoFrameDetection: Boolean = true,
     val defaultCaptureMode: CaptureMode = CaptureMode.AUTO_DETECT,
     val defaultDirection: StitchDirection = StitchDirection.VERTICAL,
-    val autoScrollEnabled: Boolean = false,
     val defaultAlbumId: Long? = null,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val language: AppLanguage = AppLanguage.ENGLISH,

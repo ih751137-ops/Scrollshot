@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.HelpOutline
-import androidx.compose.material.icons.rounded.AccessibilityNew
 import androidx.compose.material.icons.rounded.CleaningServices
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Security
@@ -58,12 +57,10 @@ fun SettingsScreen(
     albums: List<AlbumEntity>,
     usedStorageBytes: Long,
     availableStorageBytes: Long,
-    isAutoScrollEnabled: Boolean,
     storageAccessMode: GalleryStorageAccessMode = GalleryStorageAccessMode.SCOPED_MEDIA_STORE,
     onRequestLegacyGalleryPermission: () -> Unit = {},
     onUpdatePreferences: ((UserPreferences) -> UserPreferences) -> Unit,
     onClearCache: () -> Unit,
-    onOpenAccessibilitySettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showInstructions by remember { mutableStateOf(false) }
@@ -83,7 +80,7 @@ fun SettingsScreen(
                     "• 100% On-Device Processing: Screenshots, image stitching, PDF exports, and OCR text recognition run exclusively on your phone.\n\n" +
                         "• Consent Per Session: Android MediaProjection permission is requested cleanly per capture session.\n\n" +
                         "• Respects Protected Screens: FLAG_SECURE and DRM apps are respected and never bypassed.\n\n" +
-                        "• Optional Auto-Scroll: Uses AccessibilityService only when you explicitly start an Auto-Scroll session, and never collects screen text."
+                        "• Minimal Permissions: ScrollShot does not request AccessibilityService, broad storage access, or background network permissions."
                 )
             },
             confirmButton = { Button(onClick = { showPrivacyDialog = false }) { Text("Close") } }
@@ -131,7 +128,6 @@ fun SettingsScreen(
                                     when (mode) {
                                         CaptureMode.AUTO_DETECT -> stringResource(R.string.mode_auto_detect)
                                         CaptureMode.MANUAL -> stringResource(R.string.mode_manual)
-                                        CaptureMode.AUTO_SCROLL -> stringResource(R.string.mode_auto_scroll)
                                     }
                                 )
                             }
@@ -145,26 +141,6 @@ fun SettingsScreen(
                     checked = preferences.autoFrameDetection,
                     onCheckedChange = { checked -> onUpdatePreferences { it.copy(autoFrameDetection = checked) } }
                 )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text("Auto-Scroll Accessibility Service", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
-                        Text(
-                            text = if (isAutoScrollEnabled) "Enabled in Android Settings" else "Disabled (Manual capture works without this)",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    OutlinedButton(onClick = onOpenAccessibilitySettings) {
-                        Icon(Icons.Rounded.AccessibilityNew, contentDescription = null)
-                        Spacer(Modifier.width(4.dp))
-                        Text(if (isAutoScrollEnabled) "Manage" else "Enable")
-                    }
-                }
 
                 Text("Stitch Overlap Setting", style = MaterialTheme.typography.titleSmall)
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {

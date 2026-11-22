@@ -21,7 +21,6 @@
     <string name="home_direction_label">Stitch Direction</string>
     <string name="mode_auto_detect">Auto Detect</string>
     <string name="mode_manual">Manual</string>
-    <string name="mode_auto_scroll">Auto-Scroll</string>
     <string name="direction_vertical">Vertical</string>
     <string name="direction_horizontal">Horizontal</string>
     <string name="home_recent_captures">Recent Screenshots</string>
@@ -46,10 +45,6 @@
     <string name="capture_action_finish">Finish &amp; Stitch</string>
     <string name="capture_action_cancel">Cancel</string>
     <string name="capture_action_undo">Undo Frame</string>
-
-    <!-- Accessibility Service -->
-    <string name="accessibility_service_label">ScrollShot Auto-Scroll</string>
-    <string name="accessibility_service_description">Used exclusively during an active user-started Auto-Scroll screenshot session to perform scroll gestures. ScrollShot never collects screen text or monitors unrelated app activity.</string>
 
     <!-- Gallery -->
     <string name="gallery_title">Screenshot Gallery</string>
@@ -100,7 +95,6 @@
     <string name="error_insufficient_storage">Insufficient device storage to save capture. Free up space and try again.</string>
     <string name="error_low_memory">Memory limit reached. Finishing capture safely with collected frames.</string>
     <string name="error_stitch_failed">Automatic overlap detection had low confidence. Use the Manual Alignment Editor to align seams.</string>
-    <string name="error_autoscroll_unsupported">This app does not support automatic scrolling. Switch to Manual Capture Mode to scroll yourself.</string>
     <string name="error_save_failed">Could not save the screenshot image. Check available storage space and try again.</string>
     <string name="storage_legacy_permission_denied_notice">Storage permission denied — screenshots are still saved inside ScrollShot and can be shared or exported.</string>
     <string name="storage_enable_gallery_sync">Allow Gallery Save</string>

@@ -32,7 +32,6 @@ class SettingsDataStore(private val context: Context) {
         val AUTO_FRAME_DETECTION = booleanPreferencesKey("auto_frame_detection")
         val DEFAULT_CAPTURE_MODE = stringPreferencesKey("default_capture_mode")
         val DEFAULT_DIRECTION = stringPreferencesKey("default_direction")
-        val AUTO_SCROLL_ENABLED = booleanPreferencesKey("auto_scroll_enabled")
         val DEFAULT_ALBUM_ID = longPreferencesKey("default_album_id")
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val LANGUAGE = stringPreferencesKey("language")
@@ -54,7 +53,6 @@ class SettingsDataStore(private val context: Context) {
             autoFrameDetection = prefs[Keys.AUTO_FRAME_DETECTION] ?: true,
             defaultCaptureMode = prefs[Keys.DEFAULT_CAPTURE_MODE]?.let { runCatching { CaptureMode.valueOf(it) }.getOrNull() } ?: CaptureMode.AUTO_DETECT,
             defaultDirection = prefs[Keys.DEFAULT_DIRECTION]?.let { runCatching { StitchDirection.valueOf(it) }.getOrNull() } ?: StitchDirection.VERTICAL,
-            autoScrollEnabled = prefs[Keys.AUTO_SCROLL_ENABLED] ?: false,
             defaultAlbumId = prefs[Keys.DEFAULT_ALBUM_ID]?.takeIf { it > 0L },
             themeMode = prefs[Keys.THEME_MODE]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.SYSTEM,
             language = prefs[Keys.LANGUAGE]?.let { code -> AppLanguage.entries.firstOrNull { it.code == code } } ?: AppLanguage.ENGLISH,
@@ -78,7 +76,6 @@ class SettingsDataStore(private val context: Context) {
                 autoFrameDetection = prefs[Keys.AUTO_FRAME_DETECTION] ?: true,
                 defaultCaptureMode = prefs[Keys.DEFAULT_CAPTURE_MODE]?.let { runCatching { CaptureMode.valueOf(it) }.getOrNull() } ?: CaptureMode.AUTO_DETECT,
                 defaultDirection = prefs[Keys.DEFAULT_DIRECTION]?.let { runCatching { StitchDirection.valueOf(it) }.getOrNull() } ?: StitchDirection.VERTICAL,
-                autoScrollEnabled = prefs[Keys.AUTO_SCROLL_ENABLED] ?: false,
                 defaultAlbumId = prefs[Keys.DEFAULT_ALBUM_ID]?.takeIf { it > 0L },
                 themeMode = prefs[Keys.THEME_MODE]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.SYSTEM,
                 language = prefs[Keys.LANGUAGE]?.let { code -> AppLanguage.entries.firstOrNull { it.code == code } } ?: AppLanguage.ENGLISH,
@@ -98,7 +95,6 @@ class SettingsDataStore(private val context: Context) {
             prefs[Keys.AUTO_FRAME_DETECTION] = updated.autoFrameDetection
             prefs[Keys.DEFAULT_CAPTURE_MODE] = updated.defaultCaptureMode.name
             prefs[Keys.DEFAULT_DIRECTION] = updated.defaultDirection.name
-            prefs[Keys.AUTO_SCROLL_ENABLED] = updated.autoScrollEnabled
             prefs[Keys.DEFAULT_ALBUM_ID] = updated.defaultAlbumId ?: -1L
             prefs[Keys.THEME_MODE] = updated.themeMode.name
             prefs[Keys.LANGUAGE] = updated.language.code

@@ -32,7 +32,6 @@ import androidx.core.app.NotificationCompat
 import com.example.MainActivity
 import com.example.R
 import com.example.ScrollShotApp
-import com.example.accessibility.ScrollAccessibilityService
 import com.example.data.local.CaptureSessionEntity
 import com.example.data.model.CaptureMode
 import com.example.data.model.StitchDirection
@@ -234,7 +233,6 @@ class ScreenCaptureService : Service() {
                 when (mode) {
                     CaptureMode.AUTO_DETECT -> runAutoDetectLoop(prefs, mode)
                     CaptureMode.MANUAL -> runManualCaptureStart(prefs, mode)
-                    CaptureMode.AUTO_SCROLL -> runAutoScrollLoop(prefs, mode, direction)
                 }
             }
         }
@@ -472,85 +470,6 @@ class ScreenCaptureService : Service() {
 
             lastSavedBmp?.recycle()
             prevSampleBmp?.recycle()
-        }
-    }
-
-    private fun runAutoScrollLoop(prefs: UserPreferences, mode: CaptureMode, direction: StitchDirection) {
-        captureJob = serviceScope.launch {
-            val accessService = ScrollAccessibilityService.current()
-            if (accessService == null) {
-                publishError(CaptureErrorType.AUTOSCROLL_UNSUPPORTED, getString(R.string.error_autoscroll_unsupported))
-                cleanupProjection()
-                stopSelf()
-                return@launch
-            }
-
-            delay(250L)
-            var lastSavedBmp: Bitmap = acquireStableBitmap(maxAttempts = 5) ?: run {
-                publishError(CaptureErrorType.SERVICE_INTERRUPTED, getString(R.string.error_permission_revoked))
-                cleanupProjection()
-                stopSelf()
-                return@launch
-            }
-            if (isProtectedBlackFrame(lastSavedBmp)) {
-                lastSavedBmp.recycle()
-                publishError(CaptureErrorType.SECURE_CONTENT, getString(R.string.error_secure_content))
-                cleanupProjection()
-                stopSelf()
-                return@launch
-            }
-            saveFrameToSession(lastSavedBmp, prefs)
-
-            var unchangedCount = 0
-            while (!userRequestedFinish && !userCancelled) {
-                val st = _sessionState.value
-                if (st.phase == CapturePhase.PAUSED) {
-                    delay(300L)
-                    continue
-                }
-                if (st.framePaths.size >= prefs.maxFrames) {
-                    finishAndStitch()
-                    break
-                }
-
-                val scrolled = accessService.performAutoScroll(direction)
-                if (!scrolled) {
-                    if (st.framePaths.size <= 1) {
-                        lastSavedBmp.recycle()
-                        publishError(CaptureErrorType.AUTOSCROLL_UNSUPPORTED, getString(R.string.error_autoscroll_unsupported))
-                        cleanupProjection()
-                        stopSelf()
-                        return@launch
-                    } else {
-                        finishAndStitch()
-                        break
-                    }
-                }
-
-                delay(650L) // Wait for scroll animation & fling to settle
-                val nextBmp = acquireStableBitmap(maxAttempts = 4) ?: continue
-                val sA = downscaleSample(lastSavedBmp)
-                val sB = downscaleSample(nextBmp)
-                val diff = sampleDiff(sA, sB)
-                sA.recycle()
-                sB.recycle()
-
-                if (diff < 3.2f) {
-                    nextBmp.recycle()
-                    unchangedCount++
-                    if (unchangedCount >= 2) {
-                        // Reached end of page!
-                        finishAndStitch()
-                        break
-                    }
-                } else {
-                    unchangedCount = 0
-                    saveFrameToSession(nextBmp, prefs)
-                    lastSavedBmp.recycle()
-                    lastSavedBmp = nextBmp
-                }
-            }
-            lastSavedBmp.recycle()
         }
     }
 
@@ -932,7 +851,6 @@ class ScreenCaptureService : Service() {
     private fun modeLabel(mode: CaptureMode): String = when (mode) {
         CaptureMode.AUTO_DETECT -> getString(R.string.mode_auto_detect)
         CaptureMode.MANUAL -> getString(R.string.mode_manual)
-        CaptureMode.AUTO_SCROLL -> getString(R.string.mode_auto_scroll)
     }
 
     private fun formatTimer(sec: Int): String = "%02d:%02d".format(sec / 60, sec % 60)
